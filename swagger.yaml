@@ -1,0 +1,241 @@
+openapi: 3.0.0
+info:
+  title: Basic-user-system&To-do-API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://basic-user-system-api.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              name: candice
+              email: candice@gmail.com
+              password: sujhitanginehpetssecretcode1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              name: candice
+              email: candice@gmail.com
+              password: sujhitanginehpetssecretcode1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /todo:
+    post:
+      tags:
+      - Todo
+      summary: Create Task
+      operationId: CreateTask
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+            example:
+              task: Code
+              completed: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Todo
+      summary: Get all Tasks
+      operationId: GetallTasks
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /todo/{id}:
+    get:
+      tags:
+      - Todo
+      summary: Get Single Task
+      operationId: GetSingleTask
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Todo
+      summary: Update Task
+      operationId: UpdateTask
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+            example:
+              task: Coding clearance for june
+              completed: false
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Todo
+      summary: Delete Task
+      operationId: DeleteTask
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: candice
+        email: candice@gmail.com
+        password: sujhitanginehpetssecretcode1
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: candice
+        email: candice@gmail.com
+        password: sujhitanginehpetssecretcode1
+    CreateTaskRequest:
+      title: CreateTaskRequest
+      required:
+      - task
+      - completed
+      type: object
+      properties:
+        task:
+          type: string
+        completed:
+          type: boolean
+      example:
+        task: Code
+        completed: true
+    UpdateTaskRequest:
+      title: UpdateTaskRequest
+      required:
+      - task
+      - completed
+      type: object
+      properties:
+        task:
+          type: string
+        completed:
+          type: boolean
+      example:
+        task: Coding clearance for june
+        completed: false
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: Todo
+  description: ''
